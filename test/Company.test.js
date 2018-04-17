@@ -22,5 +22,18 @@ describe('Company model', () => {
         const company = new Company(data);
 
         assert.deepEqual(company.toJSON(), { _id: company._id, ...data });
+
+        assert.isUndefined(company.validateSync());
+    });
+
+    it('required fields', () => {
+        const company = new Company({});
+        const validation = company.validateSync();
+        assert.isDefined(validation, 'should give errors');
+        const { errors } = validation;
+        assert.equal(Object.keys(errors).length, 3);
+        assert.equal(errors.name.kind, 'required');
+        assert.equal(errors['address.state'].kind, 'required');
+        assert.equal(errors.size.kind, 'required');
     });
 });
