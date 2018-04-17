@@ -14,6 +14,7 @@ describe('Company model', () => {
                 zip: '97362',
                 state: 'WA'
             },
+            founded: new Date(),
             size: 2,
             isHip: true,
             keywords: ['screenprinting', 'design', 'small']
